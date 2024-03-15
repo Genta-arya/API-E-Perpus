@@ -510,7 +510,7 @@ export const changePassowrd = async (req, res) => {
     console.error("Change Password Error:", error);
     return res.status(500).json({ message: "Internal server error" });
   } finally {
-    // Tutup koneksi PrismaClient setelah selesai
+  
     await prisma.$disconnect();
   }
 };
