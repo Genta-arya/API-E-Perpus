@@ -1,0 +1,89 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-1.0.x"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model Auth {
+  uid       Int     @id @default(autoincrement())
+  username  String  @unique @db.VarChar(255)
+  email     String  @unique @db.VarChar(255)
+  password  String  @db.VarChar(255)
+  role      String? @db.VarChar(255)
+  name      String? @db.VarChar(255)
+  avatar    String? @db.VarChar(255)
+  token_jwt String? @unique @db.VarChar(255)
+  otp       String?
+}
+
+model Book {
+  id          Int          @id @default(autoincrement())
+  judul       String       @unique
+  penulis     String
+  tahunTerbit Int
+  penerbit    String
+  cover       String
+  deskripsi   String
+  lokasiRak   String
+  halaman     String
+  isbn        String
+  stok        Int
+  class       String
+  tanggalPost DateTime
+  kategori    String
+  peminjamans Peminjaman[]
+}
+
+model EBook {
+  id          Int      @id @default(autoincrement())
+  judul       String   @unique
+  penulis     String
+  tahunTerbit Int
+  penerbit    String
+  cover       String
+  deskripsi   String
+  halaman     String
+  isbn        String
+  tanggalPost DateTime
+  kategori    String
+  pdfUrl      String?
+  drive       String?
+}
+
+model Peminjaman {
+  id          Int      @id @default(autoincrement())
+  namaSiswa   String
+  noHp        String
+  tgl_pinjam  DateTime
+  tgl_selesai DateTime
+  kelas       String
+  jumlah      Int
+  status      String
+  book        Book     @relation(fields: [judulBuku], references: [judul])
+  judulBuku   String
+}
+
+model Kunjungan {
+  id         Int      @id @default(autoincrement())
+  pendamping String   @db.VarChar(255)
+  kelas      String
+  kegiatan   String   @db.Text
+  jml_org    Int
+  tanggal    DateTime
+}
+
+model Berita {
+  id          Int      @id @default(autoincrement())
+  gambar      String
+  judul       String  @unique
+  isi         String   @db.Text
+  posted      String
+  tanggalPost DateTime @default(now())
+}
+
+
