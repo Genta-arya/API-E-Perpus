@@ -361,7 +361,7 @@ export const editEBook = async (req, res) => {
     console.error("Error editing book:", error);
     res.status(500).json({ error: "Internal Server Error" });
   } finally {
-    // Memastikan koneksi dengan Prisma ditutup setelah selesai
+    // Memastikan koneksi dengan Prisma ditutup setelah selesaii
     await prisma.$disconnect();
   }
 };
