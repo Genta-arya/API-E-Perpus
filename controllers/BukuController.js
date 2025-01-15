@@ -348,7 +348,8 @@ export const getBook = async (req, res) => {
 
     // Retrieve books with pagination
     const books = await prisma.book.findMany({
-     
+      skip: offset,
+      take: parseInt(pageSize, 10),
       orderBy: { id: "desc" },
       // Your other query conditions if any
     });
@@ -357,9 +358,9 @@ export const getBook = async (req, res) => {
     res.status(200).json({
       books,
       totalBooks,
-      page: parseInt(page, 10),
+      page: 1,
       limit: parseInt(pageSize, 10),
-      totalPages,
+      totalPages : 1,
     });
   } catch (error) {
     console.error("Error retrieving books:", error);
@@ -509,8 +510,8 @@ export const searchBook = async (req, res) => {
     res.status(200).json({
       books,
       totalData,
-      currentPage: 1,
-      totalPages: 1,
+      currentPage: parseInt(page, 10),
+      totalPages,
       status: 200,
     });
   } catch (error) {
