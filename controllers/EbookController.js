@@ -386,7 +386,7 @@ export const getEBook = async (req, res) => {
       books,
       totalBooks,
       page: 1,
-      limit: parseInt(pageSize, 10),
+      limit: books.length,
       totalPages: 1,
     });
   } catch (error) {
