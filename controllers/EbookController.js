@@ -376,8 +376,7 @@ export const getEBook = async (req, res) => {
 
     // Retrieve books with pagination
     const books = await prisma.eBook.findMany({
-      skip: offset,
-      take: parseInt(pageSize, 10),
+     
       orderBy: { id: "desc" },
       // Your other query conditions if any
     });
