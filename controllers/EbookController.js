@@ -466,7 +466,7 @@ export const searchEBook = async (req, res) => {
 
     res
       .status(200)
-      .json({ books, totalData, currentPage: parseInt(page, 10), totalPages });
+      .json({ books, totalData, currentPage: 1, totalPages  : 1});
   } catch (error) {
     console.error("Error searching books:", error);
     res.status(500).json({ error: "Internal Server Error" });

@@ -509,8 +509,8 @@ export const searchBook = async (req, res) => {
     res.status(200).json({
       books,
       totalData,
-      currentPage: parseInt(page, 10),
-      totalPages,
+      currentPage: 1,
+      totalPages: 1,
       status: 200,
     });
   } catch (error) {
